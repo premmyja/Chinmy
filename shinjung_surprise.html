@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สำหรับชินจังคนเก่งของพวกเรา!</title>
+    <style>
+        /* CSS สำหรับตกแต่งเว็บไซต์ (รูปแบบ, สี, การจัดวาง) */
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #ffc0cb, #ffe0f0, #ffb6c1); /* Pink gradients */
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite; /* Animated background */
+            color: #333;
+            text-align: center;
+            overflow-x: hidden;
+            box-sizing: border-box;
+            line-height: 1.6;
+            position: relative; /* สำหรับ Snowfall Effect */
+            z-index: 1; /* ทำให้เนื้อหาอยู่บนหิมะ */
+        }
+
+        /* Gradient Animation */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Snowfall effect CSS */
+        .snowflake {
+            position: absolute;
+            background: #fff;
+            border-radius: 50%;
+            pointer-events: none; /* ทำให้คลิกผ่านได้ */
+            animation: snowfall linear infinite;
+            z-index: 0; /* อยู่ด้านล่างเนื้อหา */
+        }
+
+        @keyframes snowfall {
+            0% { transform: translateY(-10px); opacity: 0; }
+            10% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        .page {
+            display: none;
+            width: 90%;
+            max-width: 600px;
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+            padding: 30px 20px;
+            border-radius: 25px; /* Softer corners */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+            margin: 20px auto;
+            box-sizing: border-box;
+            animation: fadeIn 0.8s ease-in-out;
+            border: 2px solid #ff99cc; /* Soft pink border */
+            position: relative; /* สำหรับ Snowfall Effect */
+            z-index: 2; /* ทำให้เนื้อหาอยู่บนหิมะ */
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2 {
+            color: #ff69b4; /* Deep pink */
+            margin-bottom: 15px;
+            font-size: 2em; /* Slightly larger heading */
+            text-shadow: 0 0 5px rgba(255, 105, 180, 0.5); /* Soft pink shadow */
+            animation: textGlow 2s ease-in-out infinite alternate; /* Text glow effect */
+        }
+
+        @keyframes textGlow {
+            from { text-shadow: 0 0 5px rgba(255, 105, 180, 0.5), 0 0 10px rgba(255, 105, 180, 0.3); }
+            to { text-shadow: 0 0 8px rgba(255, 105, 180, 0.8), 0 0 15px rgba(255, 105, 180, 0.6); }
+        }
+
+        p {
+            font-size: 1.15em; /* Slightly larger paragraph */
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .main-image {
+            max-width: 90%; /* Slightly smaller to give more space */
+            height: auto;
+            border-radius: 20px; /* More rounded image corners */
+            margin-bottom: 25px;
+            border: 5px solid #ffb6c1; /* Thicker, softer pink border */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+        }
+
+        .main-image:hover {
+            transform: translateY(-8px) scale(1.02); /* Lifts and slightly enlarges on hover */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #ff69b4;
+            color: white;
+            padding: 14px 30px; /* Larger padding */
+            border-radius: 35px; /* More rounded button */
+            text-decoration: none;
+            font-size: 1.3em; /* Larger font */
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Added box-shadow transition */
+            margin-top: 20px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.4); /* Pink shadow for button */
+        }
+
+        .button:hover {
+            background-color: #ff4d94;
+            transform: translateY(-5px); /* More pronounced jump */
+            box-shadow: 0 8px 20px rgba(255, 77, 148, 0.6); /* Stronger shadow on hover */
+        }
+
+        .youtube-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border-radius: 15px; /* Rounded corners for video player */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .youtube-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .gift-text {
+            font-size: 1.4em; /* Larger gift text */
+            font-weight: bold;
+            color: #ff007f;
+            animation: pulseText 1.5s infinite alternate; /* Pulsing effect for gift text */
+        }
+        .gift-text span {
+            font-size: 2em; /* Even larger "เราอยู่ข้างๆ เสมอนะ!" */
+            color: #ff69b4;
+            text-shadow: 0 0 8px rgba(255, 105, 180, 0.8);
+        }
+
+        @keyframes pulseText {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.03); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .page {
+                padding: 20px 15px;
+                border-radius: 20px;
+            }
+            h1, h2 {
+                font-size: 1.8em;
+            }
+            p {
+                font-size: 1.05em;
+            }
+            .button {
+                font-size: 1.2em;
+                padding: 12px 25px;
+            }
+            .gift-text {
+                font-size: 1.2em;
+            }
+            .gift-text span {
+                font-size: 1.7em;
+            }
+            .main-image {
+                max-width: 95%;
+                border-radius: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page1" class="page active">
+        <h1>สวัสดีนะชินจังคนเก่ง! ❤️</h1>
+        <img src="https://i.ibb.co/Jj2zmpyX/IMG-20250723-152102.jpg" alt="รูปคู่ชินจัง" class="main-image">
+        <p>ไม่ว่าวันนี้จะเจออะไรมา... พวกเราทุกคนอยู่ตรงนี้เสมอ :) อย่าเพิ่งท้อนะ! 🥰</p>
+        <button class="button" onclick="showPage('page2')">กดตรงนี้เพื่อรับกำลังใจพิเศษ! ✨</button>
+    </div>
+
+    <div id="page2" class="page">
+        <h2>กำลังใจจากพวกเรา :) 💪</h2>
+        <img src="https://i.ibb.co/39nyt7k8/1748864357347.jpg" alt="รูปคู่ชินจัง" class="main-image">
+
+        <div class="youtube-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/OYPiXBIgvJ8?si=n5-jesQXkm03YyDV" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+
+        <p>ชินจังรู้ไหมว่านายเก่งมากๆ เลยนะ ไม่ว่าจะเจอกับเรื่องอะไรมา ขอให้นายรู้ไว้ว่ายังมีเราอยู่ตรงนี้เสมอ ไม่ต้องกังวลอะไรนะ พักบ้างนะคนเก่ง! เราอยู่ตรงนี้พร้อมซัพพอร์ตเสมอ ไม่ว่านายจะเจออะไร พลังของนายจะพาผ่านทุกอย่างไปได้แน่นอน! ยิ้มเข้าไว้นะ! โลกใบนี้ยังมีความสวยงามรอเราไปเจออีกเยอะเลย สู้ๆ นะชินจัง! ✨</p>
+        
+        <button class="button" onclick="showPage('page3')">เปิดของขวัญพิเศษจากใจ 🎁</button>
+    </div>
+
+    <div id="page3" class="page">
+        <h2>ของขวัญจากใจ :) 💖</h2>
+        <img src="https://i.ibb.co/20YKNLpp/IMG-20250602-191359-365.jpg" alt="รูปคู่ชินจัง" class="main-image">
+        <p class="gift-text">
+            ไม่ว่าจะเกิดอะไรขึ้น... ขอให้ชินจังรู้ไว้เสมอว่า<br>
+            <span style="font-size: 1.8em; color: #ff69b4;">"เราอยู่ข้างๆ เสมอนะ❤️!"</span><br>
+            ไม่ต้องกลัวที่จะล้ม ไม่ต้องกลัวที่จะผิดหวัง เพราะเมื่อไหร่ที่นายหันมา จะเจอเราอยู่ตรงนี้เสมอ เป็นกำลังใจให้ในทุกก้าวเดินนะ รักชินจังที่สุด! 🫶
+        </p>
+        <button class="button" onclick="showPage('page1')">กลับสู่หน้าหลัก 🏠</button>
+    </div>
+
+    <script>
+        // JavaScript สำหรับการเปลี่ยนหน้า
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => {
+                page.classList.remove('active'); // ซ่อนทุกหน้า
+            });
+            document.getElementById(pageId).classList.add('active'); // แสดงหน้าปัจจุบัน
+        }
+
+        // ทำให้เพลง YouTube เล่นอัตโนมัติเมื่อหน้านั้นถูกแสดง
+        // (บางเบราว์เซอร์อาจบล็อก autoplay ต้องให้ผู้ใช้กดเล่นเอง)
+        // เมื่อเปลี่ยนหน้า ควบคุมการเล่นเพลง YouTube
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new MutationObserver(mutationsList => {
+                for (const mutation of mutationsList) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const targetPage = mutation.target;
+                        if (targetPage.id === 'page2' && targetPage.classList.contains('active')) {
+                            const iframe = document.querySelector('#page2 .youtube-container iframe');
+                            if (iframe && !iframe.src.includes('autoplay=1')) {
+                                const separator = iframe.src.includes('?') ? '&' : '?';
+                                iframe.src += separator + 'autoplay=1';
+                            }
+                        } else {
+                            const iframe = document.querySelector('#page2 .youtube-container iframe');
+                            if (iframe && iframe.src.includes('autoplay=1')) {
+                                iframe.src = iframe.src.replace('&autoplay=1', '').replace('?autoplay=1', '');
+                            }
+                        }
+                    }
+                }
+            });
+
+            const page2Element = document.getElementById('page2');
+            if (page2Element) {
+                observer.observe(page2Element, { attributes: true });
+            }
+
+            // JavaScript สำหรับเอฟเฟกต์หิมะตก
+            const body = document.body;
+            const numSnowflakes = 50; // จำนวนเกล็ดหิมะ
+
+            for (let i = 0; i < numSnowflakes; i++) {
+                const snowflake = document.createElement('div');
+                snowflake.classList.add('snowflake');
+                
+                // กำหนดขนาดสุ่ม
+                const size = Math.random() * 3 + 2; // ขนาด 2-5px
+                snowflake.style.width = `${size}px`;
+                snowflake.style.height = `${size}px`;
+
+                // กำหนดตำแหน่งเริ่มต้นสุ่ม (ด้านบน)
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                
+                // กำหนด animation duration สุ่ม (ความเร็วในการตก)
+                const animationDuration = Math.random() * 10 + 5; // 5-15 วินาที
+                snowflake.style.animationDuration = `${animationDuration}s`;
+
+                // กำหนด animation delay สุ่ม (เพื่อให้เริ่มตกไม่พร้อมกัน)
+                const animationDelay = Math.random() * 5; // 0-5 วินาที
+                snowflake.style.animationDelay = `${animationDelay}s`;
+
+                body.appendChild(snowflake);
+            }
+        });
+    </script>
+</body>
+</html>
